@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "electron-main.js",
   "dependencies": {
-    "adm-zip": "^0.4.13",
+    "adm-zip": "0.4.11",
     "element-ui": "^2.4.7",
+    "read-chunk": "^3.0.0",
     "vue": "^2.5.16"
   },
   "devDependencies": {
@@ -19,7 +20,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "style-loader": "^0.21.0",
-    "uglifyjs-webpack-plugin": "^2.0.1",
+    "uglifyjs-webpack-plugin": "^1.2.4",
     "url-loader": "^1.0.1",
     "vue-loader": "^15.2.4",
     "vue-template-compiler": "^2.5.16",
