@@ -4,7 +4,7 @@
       <el-step title="Step 1" icon="el-icon-goods" description="Select package directory"></el-step>
       <el-step title="Step 2" icon="el-icon-edit" description="Input package information"></el-step>
       <el-step title="Step 3" icon="el-icon-edit-outline" description="Input tool data"></el-step>
-      <el-step title="Step 4" icon="el-icon-sold-out" description="Package and save your package"></el-step>
+      <el-step title="Step 4" icon="el-icon-sold-out" description="Packaging and save"></el-step>
     </el-steps>
     <div class="step-content" v-if="step == 0">
       <el-button type="primary" @click="selectPackageDirtory()">
