@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "electron-main.js",
   "dependencies": {
-    "adm-zip": "0.4.11",
     "element-ui": "^2.4.7",
+    "jszip": "^3.1.5",
     "read-chunk": "^3.0.0",
+    "recursive-readdir": "^2.2.2",
     "vue": "^2.5.16"
   },
   "devDependencies": {
