@@ -91,7 +91,7 @@
     </div>
     <div class="step-content" v-if="step == 3">
       <el-button type="primary" icon="el-icon-sold-out" @click="packageAndSave()">
-        Package And Save
+        Packaging And Save
       </el-button>
     </div>
   </div>
