@@ -130,7 +130,8 @@ import { remote as electron } from 'electron';
 import fs from "fs";
 import readChunk from 'read-chunk';
 import path from 'path';
-import AdmZip from 'adm-zip';
+import JSZip from "jszip";
+import recursive from "recursive-readdir";
 
 export default {
   data() {
@@ -223,10 +224,10 @@ export default {
     packageAndSave: function() {
       let packageId = "";
       let dnManifestContent = {};
-      let iconFileName = Math.random().toString(36).substring(2) + "-" + path.basename(this.iconPath);
       for (let i = 0; i < 4; i++) {
         packageId += Math.random().toString(36).substring(2);
       }
+      let iconFileName =  packageId + "-icon." + path.basename(this.iconPath).replace(/.*?\./, '');
       dnManifestContent.packageId = packageId;
       dnManifestContent.version = "1.0.0";
       dnManifestContent.packageName = this.packageName;
@@ -237,13 +238,30 @@ export default {
       electron.dialog.showSaveDialog({title: "save package", defaultPath: "package.zip" ,filters: [
         { name: 'Zip', extensions: ['zip'] }
       ]}, (savePath) => {
-        let zip = new AdmZip();
-        let content = JSON.stringify(dnManifestContent, null, 2);
-        let buffer = Buffer.from(fs.readFileSync(this.iconPath));
-        zip.addLocalFolder(this.packageDir);
-        zip.addFile(iconFileName, buffer);
-        zip.addFile("dn-manifest.json", Buffer.alloc(content.length, content), "");
-        zip.writeZip(savePath);
+        let manifestContent = JSON.stringify(dnManifestContent, null, 2);
+        recursive(this.packageDir, (err, files) => {
+          let zip = new JSZip();
+          // package folder file
+          for (let file of files) {
+            let relativePath = file.substr(this.packageDir.length + 1);
+            let buffer = Buffer.from(fs.readFileSync(file));
+            zip.file(relativePath, buffer);
+          }
+          // icon file
+          let buffer = Buffer.from(fs.readFileSync(this.iconPath));
+          zip.file(iconFileName, buffer);
+          // dn-manifest.json
+          zip.file("dn-manifest.json", manifestContent);
+
+          zip.generateNodeStream({type:'nodebuffer', streamFiles:true})
+            .pipe(fs.createWriteStream(savePath))
+            .on('finish', () => {
+              this.$message({
+                message: 'Save Success',
+                type: 'success'
+              });
+            });
+        });
       });
     }
   },
