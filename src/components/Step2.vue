@@ -22,7 +22,7 @@
         <el-input v-model="description"></el-input>
       </el-form-item>
     </el-form>
-    <el-button type="primary" @click="$emit('stepFinish')">
+    <el-button type="primary" @click="checkAndFinish()">
       Next
     </el-button>
   </div>
@@ -71,6 +71,25 @@ export default {
       let imageDataUrl = "data:" + imageType + ";base64," + Buffer.from(bitmap).toString('base64');
       this.imageUrl = imageDataUrl;
       this.$store.commit('changeIconPath', path)
+    },
+    checkAndFinish: function () {
+      for (let col of ['packageName', 'description']) {
+        if (this.$store.state[col].trim().length == 0) {
+          this.$message({
+            message: 'some data not input',
+            type: 'error'
+          });
+          return;
+        }
+      }
+      if (this.$store.state.iconPath.trim().length == 0) {
+        this.$message({
+          message: 'not select icon',
+          type: 'error'
+        });
+        return;
+      }
+      this.$emit('stepFinish');
     }
   },
   computed: {

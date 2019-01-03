@@ -113,6 +113,15 @@ export default {
       }
     },
     finishInputToolData: function() {
+      for (let optionData of this.optionDatas) {
+        if (optionData.name.trim().length == 0) {
+          this.$message({
+            message: 'any tool not input name',
+            type: 'error'
+          });
+          return;
+        }
+      }
       this.$store.commit('updateOptionDatas', this.optionDatas);
       this.$emit('stepFinish');
     }
