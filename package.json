@@ -35,6 +35,9 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "start": "electron .",
-    "start-dev": "node start-dev.js"
+    "start-dev": "node start-dev.js",
+    "package-linux": "rm -rf .package.tmp && mkdir .package.tmp && cp -rf public package.json electron-main.js .package.tmp/. && electron-packager .package.tmp DN-Tool-Packager --overwrite --platform=linux --arch=x64 && rm -rf .package.tmp",
+    "package-darwin": "rm -rf .package.tmp && mkdir .package.tmp && cp -rf public package.json electron-main.js .package.tmp/. && electron-packager .package.tmp DN-Tool-Packager --overwrite --platform=darwin --arch=x64 && rm -rf .package.tmp",
+    "package-win32": "rm -rf .package.tmp && mkdir .package.tmp && cp -rf public package.json electron-main.js .package.tmp/. && electron-packager .package.tmp DN-Tool-Packager --overwrite --platform=win32 --arch=x64 && rm -rf .package.tmp"
   }
 }
