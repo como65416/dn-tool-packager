@@ -6,8 +6,7 @@ function createWindow() {
   let indexPageURL = `file://${__dirname}/public/index.html`;
   let windowConfig = {
     width: 600,
-    height: 500,
-    icon: __dirname + '/icon.png'
+    height: 500
   };
 
   const menuTemplate = [
