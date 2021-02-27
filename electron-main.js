@@ -32,7 +32,8 @@ function createWindow() {
   if (process.argv.includes('--dev')) {
     indexPageURL = `http://localhost:8089/index.html`;
     windowConfig.webPreferences = {
-      webSecurity: false
+      webSecurity: false,
+      nodeIntegration: true,
     }
     menuTemplate.push({
       label: 'Development',
