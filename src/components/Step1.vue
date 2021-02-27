@@ -19,10 +19,10 @@ export default {
     };
   },
   methods: {
-    selectPackageDirtory: function () {
-      let selectedDirs = electron.dialog.showOpenDialog({ properties: ['openDirectory'] });
-      if (selectedDirs != null) {
-        this.$store.commit('updatePackageDir', selectedDirs[0]);
+    selectPackageDirtory: async function () {
+      let result = await electron.dialog.showOpenDialog({ properties: ['openDirectory'] });
+      if (result.filePaths.length != 0) {
+        this.$store.commit('updatePackageDir', result.filePaths[0]);
         this.$emit('stepFinish')
       }
     }
