@@ -4,7 +4,7 @@
   "main": "electron-main.js",
   "dependencies": {
     "element-ui": "^2.4.7",
-    "jszip": "^3.1.5",
+    "jszip": "^3.7.0",
     "read-chunk": "^3.0.0",
     "recursive-readdir": "^2.2.2",
     "vue": "^2.5.16",
